@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import wseemann.media.FFmpegMediaMetadataRetriever;
-
 import static android.view.View.GONE;
 
 public class AudioListFragment extends Fragment implements AudioItemOnClickListener{
@@ -43,7 +41,6 @@ public class AudioListFragment extends Fragment implements AudioItemOnClickListe
     MediaPlayer mediaPlayer;
     ImageView playImageView, pauseImageView, nextImageView, previousImageView;
     ConstraintLayout controller;
-    FFmpegMediaMetadataRetriever retriever;
 
     @Nullable
     @Override
@@ -137,6 +134,7 @@ public class AudioListFragment extends Fragment implements AudioItemOnClickListe
             }
         });
 
+
     }
 
     @Override
@@ -175,6 +173,13 @@ public class AudioListFragment extends Fragment implements AudioItemOnClickListe
                 controller.setVisibility(View.VISIBLE);
                 playImageView.setVisibility(View.INVISIBLE);
                 pauseImageView.setVisibility(View.VISIBLE);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        pauseImageView.setVisibility(View.GONE);
+                        playImageView.setVisibility(View.VISIBLE);
+                    }
+                });
                 refreshPosition(currentAudio);
             }else{
                 if(!mediaPlayer.isPlaying()) {
@@ -182,6 +187,13 @@ public class AudioListFragment extends Fragment implements AudioItemOnClickListe
                     controller.setVisibility(View.VISIBLE);
                     playImageView.setVisibility(View.INVISIBLE);
                     pauseImageView.setVisibility(View.VISIBLE);
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            pauseImageView.setVisibility(View.GONE);
+                            playImageView.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
                 else {
                     pause();

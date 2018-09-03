@@ -18,21 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service
-            android:name="dm.audiostreamer.AudioStreamingService"
-            android:enabled="true"
-            android:exported="true" />
-        <receiver android:name="dm.audiostreamer.AudioStreamingReceiver">
-            <intent-filter>
-                <action android:name="dm.audiostreamer.close" />
-                <action android:name="dm.audiostreamer.pause" />
-                <action android:name="dm.audiostreamer.next" />
-                <action android:name="dm.audiostreamer.play" />
-                <action android:name="dm.audiostreamer.previous" />
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".MainActivity"
